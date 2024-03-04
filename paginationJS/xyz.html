@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pagination with Cards</title>
+N
+<style>
+    body {
+        font-family: 'Trebuchet MS', sans-serif;
+        margin: 0;
+        padding: 0;
+
+    }
+    .container {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 0 20px;
+    }
+    .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .card {
+        width: calc(33.33% - 10px);
+        margin-bottom: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .card .card-body {
+        padding: 15px;
+    }
+    .card-text{
+        margin-top: -15px;
+        color:#929C9B;
+    }
+    .card img {
+        width: 100%;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    .card-title{
+        margin-top: -15px;
+        font-weight: 700;
+        font-size: 25px;
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin-top: 20px;
+    }
+    .pagination li {
+        margin-right: 5px;
+    }
+    .pagination li a {
+        display: block;
+        padding: 10px 20px;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        text-decoration: none;
+        color: #333;
+    }
+    .pagination li.active a {
+        background-color: #007bff;
+        color: #fff;
+        border-color: #007bff;
+    }
+    @media only screen and (max-width: 600px) {
+        .cards-container {
+            display: block;
+        }
+        .card {
+        width: 100%;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    }
+
+</style>
+</head>
+<body>
+<section class="profile_container_area" id="card_profile_container">
+
+<div class="container" >
+    <div class="cards-container" id="cardContainer">
+        <!-- Card content will be dynamically inserted here -->
+    </div>
+    <ul class="pagination" id="pagination">
+        <!-- Pagination buttons will be dynamically inserted here -->
+    </ul>
+</div>
+
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const cardsData = [
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project." },
+        { image: "https://media.istockphoto.com/id/611077456/photo/positivity-inspires-productivity.jpg?s=612x612&w=0&k=20&c=4v20YX2siOTJCXFlDoBa9KMHusX12UzJFH1H6m7qnUU=", title: "Card 2", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project." },
+        { image: "https://media.istockphoto.com/id/1383977365/photo/shot-of-two-businesspeople-discussing-something-on-a-digital-tablet.webp?s=2048x2048&w=is&k=20&c=WDsrQncXbMCSZ4y9SEMkRJFvAm6-P2qk33hFJUU8JgU=", title: "Card 3", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project." },
+        { image: "https://media.istockphoto.com/id/1250625281/photo/happy-human-resource-team-talking-to-a-candidate-on-a-job-interview.webp?s=2048x2048&w=is&k=20&c=8ULOhgei2GeFbysIQArcdtoBpSpfgWVvPOxMMlEFazA=", title: "Card 4", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project." },
+        { image: "https://media.istockphoto.com/id/968943400/photo/negotiation-goals-achieved.jpg?s=2048x2048&w=is&k=20&c=QzM5GIX04YOUo4d0JsC5yyEiSJnqDCAkZa7M3251cOc=", title: "Card 5", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project." },
+        { image: "https://media.istockphoto.com/id/1041620122/photo/the-floor-is-open-for-their-questions.jpg?s=2048x2048&w=is&k=20&c=1kR-9n22IJPZAGJeiY38rBxeV9JotOeuVOQ3C1_ENng=", title: "Card 6", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project." },
+        { image: "https://media.istockphoto.com/id/1041618674/photo/raising-a-few-issues-of-concern.jpg?s=2048x2048&w=is&k=20&c=PAeMXFRsaw4wJ_9bw6MAySOzA0NktlFzE-4Io50aYF8=", title: "Card 7", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project." },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 8", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project." },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 9", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project." }
+    ];
+
+    const cardsContainer = document.getElementById("cardContainer");
+    const paginationContainer = document.getElementById("pagination");
+
+    const cardsPerPage = 3;
+    let currentPage = 1;
+
+    function displayCards(page) {
+        cardsContainer.innerHTML = "";
+        const startIndex = (page - 1) * cardsPerPage;
+        const endIndex = startIndex + cardsPerPage;
+        const cardsToShow = cardsData.slice(startIndex, endIndex);
+
+        cardsToShow.forEach(card => {
+            const cardHtml = `
+                <div class="card">
+                    <img src="${card.image}" alt="${card.title}">
+                    <div class="card-body">
+                        <p class="card-title">${card.title}</p>
+                        <p class="card-text">${card.content}</p>
+                    </div>
+                </div>
+            `;
+            cardsContainer.innerHTML += cardHtml;
+        });
+    }
+
+    function displayPagination() {
+        paginationContainer.innerHTML = "";
+
+        const numPages = Math.ceil(cardsData.length / cardsPerPage);
+
+        if (numPages <= 1) {
+            return;
+        }
+
+        const prevLi = document.createElement("li");
+        const prevLink = document.createElement("a");
+        prevLink.href = "#card_profile_container";
+        prevLink.textContent = "Previous";
+        prevLi.appendChild(prevLink);
+        paginationContainer.appendChild(prevLi);
+
+        prevLink.addEventListener("click", function() {
+            if (currentPage > 1) {
+                changePage(currentPage - 1);
+            }
+        });
+
+        for (let i = 1; i <= numPages; i++) {
+            const li = document.createElement("li");
+            const link = document.createElement("a");
+            link.href = "#card_profile_container";
+            link.textContent = i;
+            link.addEventListener("click", function() {
+                changePage(i);
+            });
+            if (currentPage === i) {
+                li.classList.add("active");
+            }
+            li.appendChild(link);
+            paginationContainer.appendChild(li);
+        }
+
+        const nextLi = document.createElement("li");
+        const nextLink = document.createElement("a");
+        nextLink.href = "#card_profile_container";
+        nextLink.textContent = "Next";
+        nextLi.appendChild(nextLink);
+        paginationContainer.appendChild(nextLi);
+
+        nextLink.addEventListener("click", function() {
+            if (currentPage < numPages) {
+                changePage(currentPage + 1);
+            }
+        });
+    }
+
+    function changePage(page) {
+        if (page < 1 || page > Math.ceil(cardsData.length / cardsPerPage)) {
+            return;
+        }
+        currentPage = page;
+        displayCards(currentPage);
+        displayPagination();
+    }
+
+    // Initial display
+    displayCards(currentPage);
+    displayPagination();
+});
+</script>
+</body>
+</html>

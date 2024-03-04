@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pagination with Cards</title>
+<style>
+    body {
+        font-family: 'Trebuchet MS', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 0 20px;
+    }
+    .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .card {
+        width: calc(33.33% - 10px);
+        margin-bottom: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-decoration: none; /* Added to remove default link underline */
+    }
+    .card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .card .card-body {
+        padding: 15px;
+    }
+    .card img {
+        width: 100%;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    .card-title {
+        margin-top: -15px;
+        font-weight: 700;
+        font-size: 25px;
+    }
+    .card-text {
+        margin-top: -15px;
+        color: #929C9B;
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        margin-top: 20px;
+    }
+    .pagination li {
+        margin-right: 5px;
+    }
+    .pagination li a {
+        display: block;
+        padding: 10px 20px;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        text-decoration: none;
+        color: #333;
+    }
+    .pagination li.active a {
+        background-color: #007bff;
+        color: #fff;
+        border-color: #007bff;
+    }
+    .date-tag {
+         position: absolute;
+   /* Adjusted position to place it at the bottom */
+/*    right: 10px;*/
+    color: #fff;
+    margin-left: 12rem;
+    margin-top:-30px;
+    padding: 5px 10px;
+    background-color: orange;
+    border-radius: 10%;
+    font-size: 14px;
+        }
+    @media only screen and (max-width: 600px) {
+        .cards-container {
+            display: block;
+        }
+        .card {
+            width: 100%;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .date-tag {
+         position: absolute;
+ 
+    color: #fff;
+    margin-left: 20rem;
+    margin-top:-30px;
+    padding: 5px 10px;
+    background-color: orange;
+    border-radius: 10%;
+    font-size: 14px;
+        }
+    }
+    .pagination {
+         margin: 20px 0;
+         display: flex;
+         justify-content: center;
+         list-style: none;
+     }
+     .pagination li {
+         margin: 0 5px;
+     }
+     .pagination li a {
+         text-decoration: none;
+         color: #000;
+         padding: 5px 10px;
+         /* border: 1px solid #000; */
+         border-radius: 5px;
+     }
+     .pagination li ,.ellipsis {
+        color: #000;
+        padding: 5px;
+        border: 1px solid #000;
+    
+}
+     .pagination li.active a {
+        border: 1px solid #7F00FF;
+        background: #000;
+         color: #FFF;
+     }
+
+    @media only screen and (max-width: 400px) {
+        
+        .date-tag {
+         position: absolute;
+ 
+    color: #fff;
+    margin-left:10rem;
+    margin-top:-30px;
+    padding: 5px 10px;
+    background-color: orange;
+    border-radius: 10%;
+    font-size: 14px;
+        }
+    }
+</style>
+</head>
+<body>
+<section class="profile_container_area" id="card_profile_container">
+
+<div class="container" >
+    <div class="cards-container" id="cardContainer">
+        <!-- Card content will be dynamically inserted here -->
+    </div>
+    <ul class="pagination" id="pagination">
+        <!-- Pagination buttons will be dynamically inserted here -->
+    </ul>
+</div>
+
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const cardsData = [
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+
+        { image: "https://media.istockphoto.com/id/1457357147/photo/business-colleagues-talking-about-economy-crash-on-a-meeting-in-the-office.jpg?s=2048x2048&w=is&k=20&c=4xLBX-DTXr1slox5t7X6ko77GyLASVfhr52HMNqDeNc=", title: "Card 1", date: "23 Feb 2024", content: "Portrait of Successful Businessman Sitting at Desk Working on Laptop Computer in City Office. Corporate Top Manager Doing Data Analysis, Growth Statistics for e-Commerce Project.", link: "http://mastervijayram.com/get-your-ex-back.html" },
+    ];
+
+    const cardsContainer = document.getElementById("cardContainer");
+    const paginationContainer = document.getElementById("pagination");
+
+    const cardsPerPage = 3;
+    let currentPage = 1;
+
+    function displayCards(page) {
+        cardsContainer.innerHTML = "";
+        const startIndex = (page - 1) * cardsPerPage;
+        const endIndex = startIndex + cardsPerPage;
+        const cardsToShow = cardsData.slice(startIndex, endIndex);
+
+        cardsToShow.forEach(card => {
+            const cardHtml = `
+                <a href="${card.link}" class="card">
+                    <img src="${card.image}" alt="${card.title}">
+                    <div class="card-body">
+                        <span class="date-tag">${card.date}</span>
+                        <p class="card-title">${card.title}</p>
+                        <p class="card-text">${card.content}</p>
+                    </div>
+                </a>
+            `;
+            cardsContainer.innerHTML += cardHtml;
+        });
+    }
+
+    function displayPagination() {
+            paginationContainer.innerHTML = "";
+    
+            const numPages = Math.ceil(cardsData.length / cardsPerPage);
+    
+            const visiblePages = 1; // 
+            const ellipsis = '...';
+    
+            for (let i = 1; i <= numPages; i++) {
+                if (i <= visiblePages || i > numPages - visiblePages || Math.abs(i - currentPage) <= visiblePages) {
+                    const li = document.createElement("li");
+                    const link = document.createElement("a");
+                    link.href = "#newstoday";
+                    link.textContent = i;
+                    link.addEventListener("click", function() {
+                        changePage(i);
+                    });
+                    if (currentPage === i) {
+                        li.classList.add("active");
+                    }
+                    li.appendChild(link);
+                    paginationContainer.appendChild(li);
+                } else if (paginationContainer.lastChild.textContent !== ellipsis) {
+                    const li = document.createElement("li");
+                    const span = document.createElement("span");
+                    span.textContent = ellipsis;
+                    li.appendChild(span);
+                    paginationContainer.appendChild(li);
+                }
+            }
+    
+            // Previous button
+            const prevLi = document.createElement("li");
+            const prevLink = document.createElement("a");
+            prevLink.href = "#newstoday";
+            prevLink.textContent = "<";
+            prevLi.appendChild(prevLink);
+            paginationContainer.prepend(prevLi);
+    
+            prevLink.addEventListener("click", function() {
+                if (currentPage > 1) {
+                    changePage(currentPage - 1);
+                }
+            });
+    
+            // Next button
+            const nextLi = document.createElement("li");
+            const nextLink = document.createElement("a");
+            nextLink.href = "#newstoday";
+            nextLink.textContent = ">";
+            nextLi.appendChild(nextLink);
+            paginationContainer.appendChild(nextLi);
+    
+            nextLink.addEventListener("click", function() {
+                if (currentPage < numPages) {
+                    changePage(currentPage + 1);
+                }
+            }); 
+        }
+    
+        function changePage(page) {
+            currentPage = page;
+            displayCards(currentPage);
+            displayPagination();
+        }
+    
+        displayCards(currentPage);
+        displayPagination();
+    }); 
+</script>
+</body>
+</html>
