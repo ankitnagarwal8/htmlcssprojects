@@ -1,0 +1,442 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;700&display=swap");
+ body {
+	 display: flex;
+	 height: 100vh;
+	 justify-content: center;
+	 align-items: center;
+	 font-family: "Josefin Sans", "Futura";
+	 background: linear-gradient(to bottom, #cef4ec 42.5%, #b0dfd8 42.5%, #b0dfd8 60%, #ccc 60%);
+	 transform-style: preserve-3d;
+	 perspective: 1050vmin;
+	 --time: 0.25s;
+	 overflow: hidden;
+	 margin: 0;
+	 filter: url(#squiggly);
+	 animation: squigvision 0.1s linear infinite alternate;
+	 cursor: pointer;
+}
+ @keyframes squigvision {
+	 to {
+		 filter: url(#squiggly2);
+	}
+}
+ body svg {
+	 position: absolute;
+}
+ body h1 {
+	 transform-style: preserve-3d;
+	 transform: translateZ(12.75vmin);
+	 position: absolute;
+	 top: 0;
+	 margin: 0;
+	 font-size: 3vmin;
+	 width: 90%;
+	 text-align: center;
+	 letter-spacing: 0.5vmin;
+	 line-height: 1.75;
+	 color: #fff;
+	 font-weight: 900;
+	 background-image: linear-gradient(45deg, #e6753e 20%, #b46a7e 20%, #b46a7e 40%, #62ceb9 40%, #62ceb9 60%, #449767 60%, #449767 80%, #f1b84a 80%);
+	 background-size: 50vw 100%;
+	 background-position: 0vw 50%;
+	 -webkit-background-clip: text;
+	 -webkit-text-fill-color: transparent;
+	 animation: bgmove 5s linear infinite;
+	 -webkit-mask: radial-gradient(circle at center, #000 1px, transparent 1px, transparent 2px) 50% 50% / 2px 2px;
+}
+ @keyframes bgmove {
+	 to {
+		 background-position: 50vw 50%;
+	}
+}
+ body .menu {
+	 width: 19vmin;
+	 height: 16vmin;
+	 right: 13.75vmin;
+	 top: 5vmin;
+	 position: absolute;
+	 background: #222;
+	 border-radius: 0.5vmin;
+	 box-shadow: 0 0 0 0.5vmin #f1d0b8;
+	 padding: 0.15vmin 0.5vmin;
+	 transform-style: preserve-3d;
+	 transform: translateZ(12.75vmin);
+	 display: grid;
+	 grid-template-columns: repeat(2, 1fr);
+	 grid-template-rows: repeat(14, 1fr);
+	 grid-column-gap: 0px;
+	 grid-row-gap: 0px;
+}
+ body .menu * {
+	 color: #fff;
+	 font-size: 0.65vmin;
+	 margin: 0;
+	 padding: 0;
+}
+ body .menu * span:last-of-type {
+	 font-weight: 900;
+}
+ body .menu p {
+	 display: grid;
+	 grid-template-columns: 75% 25%;
+	 grid-template-rows: 1fr;
+	 grid-column-gap: 0px;
+	 grid-row-gap: 0px;
+}
+ body .menu h2 {
+	 grid-column: span 2;
+	 font-size: 0.9vmin;
+	 text-transform: uppercase;
+	 margin-top: 0.25vmin;
+	 padding-top: 0.25vmin;
+	 position: relative;
+	 letter-spacing: 0.25vmin;
+	 font-weight: 900;
+	 border-top: 0.1vmin solid #666;
+}
+ body .menu h2:first-of-type {
+	 margin-top: 0;
+	 border-top: none;
+}
+ body .menu h2:last-of-type ~ p:last-of-type {
+	 grid-column: span 2;
+	 grid-template-columns: 1fr 1fr;
+}
+ body:hover #truck {
+	 transform: translateZ(150vmin);
+}
+ body:active #truck {
+	 transform: translateZ(350vmin);
+}
+ body #truck {
+	 z-index: 2;
+	 width: 60vmin;
+	 height: 40vmin;
+	 position: relative;
+	 transform-style: preserve-3d;
+	 transition: 1s ease-in-out;
+	 transform: translateZ(-50vmin);
+	 pointer-events: none;
+}
+ body #truck .inner {
+	 animation: spin 5s ease-in-out infinite alternate;
+	 transform-style: preserve-3d;
+	 position: absolute;
+	 width: 100%;
+	 height: 100%;
+	 left: 0;
+	 top: 0;
+}
+ body #truck .inner:before {
+	 transform-style: preserve-3d;
+	 backface-visibility: hidden;
+	 content: "";
+	 position: absolute;
+	 width: 400vw;
+	 height: 60vmin;
+	 background: linear-gradient(to right, #fff 7.5vmin, #666 7.5vmin, #666 10vmin) 50% 50% / 15vmin 2vmin repeat-x, #666;
+	 transform: translateX(-50%) rotateX(90deg);
+	 bottom: -25vmin;
+	 left: -50%;
+	 animation: drive 0.15s linear infinite;
+	 box-shadow: 0 0 0 5vmin #b3b3b3, 0 -20vh 0 #ccc;
+}
+ @keyframes drive {
+	 to {
+		 transform: translateX(calc(-50% - 15vmin)) rotateX(90deg);
+	}
+}
+ @keyframes spin {
+	 0% {
+		 transform: translateZ(15vmin) rotateY(-25deg) rotateX(-5deg) translateX(-10vmin);
+	}
+	 50% {
+		 transform: translateZ(0vmin) rotateY(-20deg) rotateX(-0.25deg) translateX(5vmin);
+	}
+	 75% {
+		 transform: translateZ(15vmin) rotateY(-25deg) rotateX(-5deg) translateX(-10vmin);
+	}
+	 100% {
+		 transform: translateZ(0vmin) rotateY(-20deg) rotateX(-7.5deg) translateX(7.5vmin);
+	}
+}
+ body #truck .side {
+	 transform-style: preserve-3d;
+	 position: absolute;
+	 width: 100%;
+	 height: 30vmin;
+	 left: 0;
+	 top: 0;
+	 transform: translateZ(-12.5vmin);
+}
+ body #truck .side:before, body #truck .side:after {
+	 content: "";
+	 position: absolute;
+	 width: 100%;
+	 height: 100%;
+	 left: 0;
+	 top: 0;
+	 background: linear-gradient(to bottom, #fefefe 20%, rgba(255, 255, 255, 0.15) 20%, rgba(255, 255, 255, 0.15) 58%, #f19a73 58%), linear-gradient(to right, #fefefe 10%, rgba(255, 255, 255, 0.15) 10%, rgba(255, 255, 255, 0.15) 40%, #fefefe 40%, #fefefe 80%, rgba(255, 255, 255, 0.15) 80%);
+	 transform: translateZ(-0.05px);
+	 box-shadow: inset 0 -1.5vmin 0 #efefef;
+}
+ body #truck .side:after {
+	 background: linear-gradient(to bottom, #ccc 20%, rgba(255, 255, 255, 0.015) 20%, rgba(255, 255, 255, 0.015) 58%, #ccc 58%), linear-gradient(to right, #ccc 10%, rgba(255, 255, 255, 0.015) 10%, rgba(255, 255, 255, 0.015) 40%, #ccc 40%, #ccc 80%, rgba(255, 255, 255, 0.015) 80%);
+	 transform: translateZ(0.05px);
+}
+ body #truck .side:first-of-type span, body #truck .side:nth-of-type(2) span {
+	 transform-style: preserve-3d;
+	 position: absolute;
+	 width: 9vmin;
+	 height: 9vmin;
+	 border-radius: 100%;
+	 background: #222;
+	 bottom: -5vmin;
+	 left: 10vmin;
+	 animation: shadow 5s ease-in-out infinite alternate;
+	 transform: skew(-11deg) translateZ(-1vmin);
+}
+ body #truck .side:first-of-type span:after, body #truck .side:nth-of-type(2) span:after {
+	 content: "";
+	 position: absolute;
+	 width: 30%;
+	 height: 30%;
+	 left: 35%;
+	 top: 35%;
+	 background: linear-gradient(45deg, transparent calc(50% - 0.25vmin), #ccc calc(50% - 0.5vmin), #ccc calc(50% + 0.5vmin), transparent calc(50% + 0.25vmin)), linear-gradient(-45deg, transparent calc(50% - 0.25vmin), #ccc calc(50% - 0.5vmin), #ccc calc(50% + 0.5vmin), transparent calc(50% + 0.25vmin)), radial-gradient(circle at center, #999 1.25vmin, transparent 1.25vmin);
+	 box-shadow: 0 0 0 0.5vmin #ccc, 0 0 0 1.5vmin #222, 0 0 0 2vmin #fff;
+	 border-radius: 100%;
+	 animation: turn 0.5s linear infinite;
+}
+ @keyframes turn {
+	 from {
+		 transform: rotate(0deg);
+	}
+	 to {
+		 transform: rotate(360deg);
+	}
+}
+ @keyframes shadow {
+	 0% {
+		 box-shadow: 1.5vmin 0.15vmin 0 0.25vmin #000;
+	}
+	 50% {
+		 box-shadow: 1.15vmin 0vmin 0 #000;
+	}
+	 75% {
+		 box-shadow: 1.15vmin -0.5vmin 0 #000;
+	}
+	 100% {
+		 box-shadow: 0.5vmin 0vmin 0 0.25vmin #000;
+	}
+}
+ body #truck .side:first-of-type span:nth-of-type(2), body #truck .side:nth-of-type(2) span:nth-of-type(2) {
+	 left: auto;
+	 right: 11vmin;
+}
+ body #truck .side:first-of-type:before, body #truck .side:nth-of-type(2):before, body #truck .side:first-of-type:after, body #truck .side:nth-of-type(2):after {
+	 clip-path: polygon(0 0, 85% 0, 89% 57%, 100% 65%, 100% 100%, 0 100%);
+	 -webkit-mask: radial-gradient(circle at bottom, transparent 5vmin, #000 5vmin) 0% 50% / 50% 100% no-repeat, radial-gradient(circle at bottom, transparent 5vmin, #000 5vmin) 100% 50% / 50% 100% no-repeat;
+}
+ body #truck .side:first-of-type span:after {
+	 display: none;
+}
+ body #truck .side:first-of-type:before {
+	 display: none;
+}
+ body #truck .side:nth-of-type(2) {
+	 transform: translateZ(12.5vmin);
+}
+ body #truck .side:nth-of-type(2):before {
+	 transform: translateZ(0.05px);
+}
+ body #truck .side:nth-of-type(2):after {
+	 display: none;
+}
+ body #truck .side:nth-of-type(3) {
+	 clip-path: none;
+	 width: 25vmin;
+	 left: -12.5vmin;
+	 transform: rotateY(-90deg);
+}
+ body #truck .side:nth-of-type(3):before, body #truck .side:nth-of-type(3):after {
+	 content: "";
+	 position: absolute;
+	 width: 100%;
+	 height: 100%;
+	 background: linear-gradient(to bottom, #efefef 20%, rgba(255, 255, 255, 0.15) 20%, rgba(255, 255, 255, 0.15) 55%, #efefef 55%, #fff 58%, #f19a73 58%), linear-gradient(to right, #fff 10%, transparent 10%, transparent 90%, #fff 90%);
+	 top: 0;
+	 left: 0;
+	 transform: translateZ(0.05px);
+	 clip-path: none;
+}
+ body #truck .side:nth-of-type(3):after {
+	 background: linear-gradient(to bottom, #bfbfbf 20%, rgba(255, 255, 255, 0.215) 20%, rgba(255, 255, 255, 0.215) 55%, #bfbfbf 55%, #bfbfbf 58%, #bfbfbf 59%), linear-gradient(to right, #b3b3b3 10%, transparent 10%, transparent 90%, #ccc 90%);
+	 transform: translateZ(-0.05px);
+}
+ body #truck .side:nth-of-type(4) {
+	 width: 25vmin;
+	 transform: none;
+	 left: 64.15%;
+	 transform-origin: top;
+	 transform: rotateY(-90deg) rotateX(-8deg);
+}
+ body #truck .side:nth-of-type(4) span {
+	 position: absolute;
+	 width: 6vmin;
+	 height: 6vmin;
+	 right: 2vmin;
+	 bottom: 8vmin;
+	 border-radius: 100%;
+	 box-shadow: inset 0 0 0 0.75vmin #000;
+	 background: linear-gradient(45deg, transparent calc(50% - 0.5vmin), #000 calc(50% - 0.5vmin), #000 calc(50% + 0.5vmin), transparent calc(50% + 0.5vmin)), linear-gradient(-45deg, transparent calc(50% - 0.5vmin), #000 calc(50% - 0.5vmin), #000 calc(50% + 0.5vmin), transparent calc(50% + 0.5vmin)), radial-gradient(circle at center, #000 1.25vmin, transparent 1.25vmin);
+	 animation: turn2 2s ease-in-out infinite alternate;
+}
+ @keyframes turn2 {
+	 50% {
+		 transform: rotate(20deg);
+	}
+	 100% {
+		 transform: rotate(-80deg);
+	}
+}
+ body #truck .side:nth-of-type(4):before, body #truck .side:nth-of-type(4):after {
+	 clip-path: none;
+	 background: linear-gradient(to bottom, #efefef 20.5%, rgba(255, 255, 255, 0.15) 20%, rgba(255, 255, 255, 0.15) 58%);
+}
+ body #truck .side:nth-of-type(4):after {
+	 background: #fff;
+	 bottom: 100%;
+	 top: auto;
+	 transform-origin: bottom;
+	 transform: rotateX(-82deg);
+	 height: 51vmin;
+	 box-shadow: 0 0 0 0.15vmin #fff;
+}
+ body #truck .side:nth-of-type(5) {
+	 width: 25vmin;
+	 transform: none;
+	 left: 79.125%;
+	 height: 26.5%;
+	 top: auto;
+	 bottom: 10vmin;
+	 background: #f09267;
+	 transform: rotateY(-90deg);
+	 box-shadow: inset 0 -1.5vmin 0 #e2e2e2;
+}
+ body #truck .side:nth-of-type(5) span {
+	 position: absolute;
+	 width: 8vmin;
+	 height: 1vmin;
+	 left: calc(50% - 4vmin);
+	 top: calc(50% - 0.5vmin);
+	 background: #ccc;
+	 box-shadow: 0 -1.5vmin 0 #ccc, 0 1.5vmin 0 #ccc;
+	 transform: translateZ(-0.5vmin);
+}
+ body #truck .side:nth-of-type(5):before {
+	 clip-path: none;
+	 background: #ef895c;
+	 height: 60%;
+	 box-shadow: 0.5vmin 0 0 #ef895c;
+	 top: auto;
+	 bottom: 100%;
+	 transform-origin: bottom;
+	 transform: rotateX(-71deg);
+}
+ body #truck .side:nth-of-type(5):after {
+	 width: 3vmin;
+	 height: 3vmin;
+	 transform: none;
+	 background: #f6fbf0;
+	 border-radius: 100%;
+	 clip-path: none;
+	 top: calc(50% - 1.5vmin);
+	 left: 3.5vmin;
+	 box-shadow: 15vmin 0 0 #f6fbf0;
+	 transform: translateZ(-0.5vmin);
+}
+ body #truck .side:nth-of-type(6) {
+	 width: 20vmin;
+	 height: 12.5vmin;
+	 transform-origin: top;
+	 transform: translateZ(12.5vmin) rotateX(75deg);
+	 left: 5vmin;
+	 top: 5vmin;
+	 background: linear-gradient(to right, #e6753e 20%, #b46a7e 20%, #b46a7e 40%, #62ceb9 40%, #62ceb9 60%, #449767 60%, #449767 80%, #f1b84a 80%);
+	 box-shadow: inset 0 0 0 50vmin rgba(0, 0, 0, 0.05);
+	 animation: bounce 0.75s ease-in-out infinite alternate;
+}
+ @keyframes bounce {
+	 50% {
+		 transform: translateZ(12.5vmin) rotateX(80deg);
+	}
+	 75% {
+		 transform: translateZ(12.5vmin) rotateX(75deg);
+	}
+	 100% {
+		 transform: translateZ(12.5vmin) rotateX(77deg);
+	}
+}
+ body #truck .side:nth-of-type(6):after {
+	 width: 0.5vmin;
+	 height: 15vmin;
+	 transform-origin: top;
+	 background: #ccc;
+	 left: 2vmin;
+	 top: 12.5vmin;
+	 transform: rotateX(-125deg);
+	 box-shadow: 15vmin 0 0 #ccc;
+}
+ body #truck .side:nth-of-type(6):before {
+	 width: 100%;
+	 height: 2.5vmin;
+	 top: 100%;
+	 left: 0;
+	 background: inherit;
+	 transform-origin: top;
+	 transform: rotateX(-75deg);
+	 -webkit-mask: radial-gradient(circle at top, #000 1.25vmin, transparent 1.25vmin) calc(50% - 1.25vmin) 100% / 2.5vmin 2.75vmin repeat-x;
+}
+ body #truck .shadow {
+	 position: absolute;
+	 width: 90%;
+	 height: 75%;
+	 background: rgba(0, 0, 0, 0.15);
+	 transform: rotateX(-90deg);
+	 top: 19.75vmin;
+	 left: 7.5%;
+	 filter: blur(10px);
+}
+ body #truck .counter {
+	 position: absolute;
+	 width: 20vmin;
+	 height: 12.5vmin;
+	 transform-origin: top;
+	 transform: translateZ(12.5vmin) rotateX(90deg);
+	 left: 5vmin;
+	 top: 17vmin;
+	 background: #ccc;
+	 transform-style: preserve-3d;
+}
+ body #truck .counter:before, body #truck .counter:after {
+	 content: "";
+	 position: absolute;
+	 width: 100%;
+	 height: 1.5vmin;
+	 left: 0;
+	 bottom: -1.5vmin;
+	 background: #efefef;
+	 transform-origin: top;
+	 transform: rotateX(-90deg);
+}
+ body #truck .counter:after {
+	 height: 100%;
+	 width: 1.5vmin;
+	 bottom: 0;
+	 left: 100%;
+	 transform-origin: left;
+	 transform: rotateY(90deg);
+	 background: #e2e2e2;
+}
+ 
