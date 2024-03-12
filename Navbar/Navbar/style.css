@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: black;
+    color: white;
+}
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 50px;
+}
+ul{
+    height: 100vh;
+    width: 70vh;
+    min-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+li{
+    position: relative;
+    list-style: none;
+    color: silver;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    padding: 0 10px;
+}
+li::after{
+    content: "";
+    position: absolute;
+    background-color: #0ef;
+    height: 5px;
+    width: 0;
+    left: 0;
+    bottom: -8px;
+    transition: all 0.5s ease;
+}
+li:hover::after{
+    width: 100%;
+}
