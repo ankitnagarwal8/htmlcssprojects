@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: black;
+}
+
+.loader{
+    position: relative;
+    margin: auto;
+    width: 350px;
+    height: 350px;
+}
+.loader div{
+    background-color: red;
+    position: absolute;
+    margin: auto;
+    width: 125px;
+    height: 200px;
+}
+.loader div:nth-child(1){
+    left: 40px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transform: rotate(45deg);
+    transform-origin: 50% 69%;
+    border-radius: 100px 100px 10px 10px;
+    animation: 4s linear infinite;
+    animation-name: myanim1;
+}
+@keyframes myanim1{
+    25%{
+        transform: rotate(45deg) rotateX(180deg);
+    }
+    50%{
+        transform: rotate(45deg) rotateX(180deg);
+    }
+    75%{
+        transform: rotate(45deg);
+    }
+}
+.loader div:nth-child(2){
+    left: 132px;
+    top: 151px;
+    transform: rotate(135deg);
+    transform-origin: 50% 31%; 
+    border-radius: 100px 100px 10px 10px;
+    border-radius: 10px 10px 100px 100px;
+    animation: 4s 1s linear infinite;
+    animation-name: myanima2;
+}
+@keyframes myanima2{
+    25%{
+        transform: rotate(135deg) rotateX(180deg);
+    }
+    50%{
+        transform: rotate(135deg) rotateX(180deg);
+    }
+    75%{
+        transform: rotate(135deg);
+    }
+}
